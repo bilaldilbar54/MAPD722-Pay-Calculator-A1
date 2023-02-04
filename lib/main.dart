@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -83,6 +84,10 @@ class _MyAppState extends State<MyApp> {
                                         margin: const EdgeInsets.fromLTRB(
                                             20, 70, 20, 20),
                                         child: TextFormField(
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter
+                                                .digitsOnly
+                                          ],
                                           controller: _userhours,
                                           decoration: const InputDecoration(
                                               border: OutlineInputBorder(),
@@ -103,6 +108,10 @@ class _MyAppState extends State<MyApp> {
                                         margin: const EdgeInsets.fromLTRB(
                                             20, 5, 20, 20),
                                         child: TextFormField(
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter
+                                                .digitsOnly
+                                          ],
                                           controller: _userrate,
                                           decoration: const InputDecoration(
                                               border: OutlineInputBorder(),
