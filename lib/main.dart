@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return _MyAppState();
@@ -26,14 +28,19 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       var hoursworked = double.parse(_userhours.text.toString().trim());
       var payrate = double.parse(_userrate.text.toString().trim());
+      hourscheck(hoursworked, payrate);
+    });
+  }
 
-      if (hoursworked > 40) {
-        _regularpay = (40 * payrate);
-        _overtimepay = ((hoursworked - 40) * payrate * 1.5);
+  void hourscheck(double hours, double pay) {
+    setState(() {
+      if (hours > 40) {
+        _regularpay = (40 * pay);
+        _overtimepay = ((hours - 40) * pay * 1.5);
         _paytax = (_regularpay * 0.18);
         _totalpay = (_regularpay + _overtimepay);
       } else {
-        _regularpay = (hoursworked * payrate);
+        _regularpay = (hours * pay);
         _paytax = (_regularpay * 0.18);
         _totalpay = (_regularpay + _overtimepay);
       }
@@ -42,6 +49,8 @@ class _MyAppState extends State<MyApp> {
 
   void clear() {
     setState(() {
+      _userhours.clear();
+      _userrate.clear();
       _regularpay = 0.0;
       _overtimepay = 0.0;
       _totalpay = 0.0;
@@ -113,7 +122,7 @@ class _MyAppState extends State<MyApp> {
                                         Container(
                                           width: 180,
                                           margin: const EdgeInsets.fromLTRB(
-                                              25, 5, 15, 8),
+                                              25, 15, 15, 8),
                                           child: ElevatedButton(
                                             onPressed: () {
                                               if (key.currentState!
@@ -132,7 +141,7 @@ class _MyAppState extends State<MyApp> {
                                         Container(
                                           width: 130,
                                           margin: const EdgeInsets.fromLTRB(
-                                              20, 5, 15, 8),
+                                              20, 15, 15, 8),
                                           child: ElevatedButton(
                                             onPressed: () {
                                               clear();
